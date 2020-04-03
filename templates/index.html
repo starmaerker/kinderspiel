@@ -12,7 +12,7 @@
 
     <form action="" method="">
        <h2>Antwort:</h2><input id="result" type="text" name="Antwort">
-        <button onclick="check()">Prüfe</button>
+        <input type="button" value="Prüfe" onclick="check()" />
     </form>
 
     <h1 id="big"></h1>
@@ -21,13 +21,16 @@
 
     <script>
     let delta = {{ delta.total_seconds() }};
-    console.log(delta);
+    let hours = Math.floor(delta / 3600);
+    let minutes = (delta - hours * 3600) / 60;
+    let result = `${hours}:${minutes}`
+
     const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
 
     function check() {
-        if (delta == document.getElementById("result").value) {
+        if (result == document.getElementById("result").value) {
             document.getElementById("big").innerHTML = "Richtig";
 
         } else {
