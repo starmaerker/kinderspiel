@@ -5,12 +5,43 @@
     <title>Kinderspiel</title>
 
 </head>
+
 <body>
+
     <h2>Wieviel Zeit vergeht von {{ first }} bis {{ second }}</h2>
 
-    <h2>Antwort:</h2><input type="text">
-    <button type="submit">Los</button>
+    <form action="" method="">
+       <h2>Antwort:</h2><input id="result" type="text" name="Antwort">
+        <button onclick="check()">Prüfe</button>
+    </form>
+
+    <h1 id="big"></h1>
 
     <h3>{{ delta }}</h3>
+
+    <script>
+    let delta = {{ delta.total_seconds() }};
+    console.log(delta);
+    const sleep = milliseconds => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  };
+
+    function check() {
+        if (delta == document.getElementById("result").value) {
+            document.getElementById("big").innerHTML = "Richtig";
+
+        } else {
+            document.getElementById("big").style.color = "red";
+            document.getElementById("big").innerHTML = "Falsch";
+        }
+
+        document.getElementById("result").value = "";
+        sleep(1500).then(() => {
+            location.reload();
+        });
+    }
+
+</script>
 </body>
 </html>
+
