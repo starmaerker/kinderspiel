@@ -2,22 +2,23 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Kinderspiel</title>
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 
 <body>
 
     <h2>Wieviel Zeit vergeht von {{ first }} bis {{ second }}</h2>
 
-    <form action="" method="">
+    <p id="score"></p>
+    <p id="big"></p>
+
+    <form id="form" action="" method="">
        <h2>Antwort:</h2><input id="result" type="text" name="Antwort">
         <input type="button" value="Prüfe" onclick="check()" />
     </form>
-
-    <h1 id="big"></h1>
-
-    <h3>{{ delta }}</h3>
 
     <script>
     let delta = {{ delta.total_seconds() }};
@@ -25,6 +26,7 @@
     let minutes = (delta - hours * 3600) / 60;
     let result = `${hours}:${minutes}`
 
+    const sound = new Audio();
     const sleep = milliseconds => {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
   };
@@ -32,10 +34,12 @@
     function check() {
         if (result == document.getElementById("result").value) {
             document.getElementById("big").innerHTML = "Richtig";
+            playSound("static/tada.mp3");
 
         } else {
             document.getElementById("big").style.color = "red";
             document.getElementById("big").innerHTML = "Falsch";
+            playSound("static/slip.mp3");
         }
 
         document.getElementById("result").value = "";
@@ -43,6 +47,11 @@
             location.reload();
         });
     }
+
+    function playSound(song) {
+    sound.src = song;
+    sound.play();
+  }
 
 </script>
 </body>

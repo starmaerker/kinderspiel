@@ -1,0 +1,21 @@
+h2,
+#big,
+#form,
+#score {
+  text-align: center;
+}
+
+#big {
+  font-size: 8em;
+}
+
+#score {
+  font-size: 4em;
+  color: green;
+}
+
+button {
+  margin-left: 47%;
+  width: 100px;
+  height: 2em;
+}
