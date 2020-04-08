@@ -15,7 +15,7 @@
     <p id="score"></p>
     <p id="big"></p>
 
-    <form id="form" action="" method="">
+    <form id="form" action="{{ url_for('index') }}" method="POST">
        <h2>Antwort:</h2><input id="result" type="text" name="Antwort">
         <input type="button" value="Prüfe" onclick="check()" />
     </form>
