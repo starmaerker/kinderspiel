@@ -16,13 +16,15 @@ session = DBSession()
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    first, second, delta = random_datetime.calc()
+    first, second, delta_hours, delta_minutes = random_datetime.calc()
 
-    result = Results(solution=delta.seconds, guess=delta.seconds)
+    delta = f"{delta_hours}:{delta_minutes}"
+
+    result = Results(solution=delta, guess=delta)
     session.add(result)
     session.commit()
 
-    return render_template('index.html', first=first, second=second, delta=delta)
+    return render_template('index.html', first=first, second=second, delta_hours=delta_hours, delta_minutes=delta_minutes)
 
 
 if __name__ == '__main__':

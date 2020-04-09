@@ -1,4 +1,5 @@
 import random
+import math
 from datetime import datetime, timedelta
 
 
@@ -17,4 +18,7 @@ def calc():
 
     delta = second - first
 
-    return first.strftime("%H:%M"), second.strftime("%H:%M"), delta
+    delta_hours = math.floor(delta.total_seconds() / 3600)
+    delta_minutes = math.floor((delta.total_seconds() - delta_hours * 3600) / 60)
+
+    return first.strftime("%H:%M"), second.strftime("%H:%M"), delta_hours, delta_minutes

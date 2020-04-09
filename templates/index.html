@@ -21,10 +21,10 @@
     </form>
 
     <script>
-    let delta = {{ delta.total_seconds() }};
-    let hours = Math.floor(delta / 3600);
-    let minutes = (delta - hours * 3600) / 60;
-    let result = `${hours}:${minutes}`
+    let delta_hours = {{ delta_hours }};
+    let delta_minutes = {{ delta_minutes }};
+    let delta = `${delta_hours}:${delta_minutes}`;
+
 
     const sound = new Audio();
     const sleep = milliseconds => {
@@ -32,7 +32,8 @@
   };
 
     function check() {
-        if (result == document.getElementById("result").value) {
+
+        if (delta == document.getElementById("result").value) {
             document.getElementById("big").innerHTML = "Richtig";
             playSound("static/tada.mp3");
 
