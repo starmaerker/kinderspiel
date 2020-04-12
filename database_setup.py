@@ -5,16 +5,13 @@ import datetime
 
 Base = declarative_base()
 
-datetime.datetime.now()
-
 
 class Results(Base):
     __tablename__ = 'results'
     id = Column(Integer, primary_key=True)
     solution = Column(String(42), nullable=False)
     guess = Column(String(42))
-    timestamp = Column(TIMESTAMP, default=datetime.datetime.now())
-
+    timestamp = Column(TIMESTAMP, default=datetime.datetime.now)
 
 engine = create_engine('sqlite:///database.db')
 Base.metadata.create_all(engine)
